@@ -1,5 +1,6 @@
 
-# GPA Manager：A modular Python CLI project for calculating university GPA with structured input handling and weighted score computation.
+# GPA Manager
+A modular Python CLI project for calculating university GPA with structured input handling and weighted score computation.
 
 ## 繁體中文
 
