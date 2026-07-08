@@ -5,6 +5,10 @@ A desktop GPA management and academic planning tool built with Python.
 GPA Manager helps university students calculate, manage, and analyze their GPA through an intuitive graphical interface.
 
 The project focuses on clean architecture, usability, and practical student needs.
+## Documentation
+
+- [Changelog](CHANGELOG.md)
+- [Roadmap](ROADMAP.md)
 
 ---
 
