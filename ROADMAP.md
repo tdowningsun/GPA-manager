@@ -10,34 +10,19 @@ GPA Manager 是一個面向大學生的 GPA 管理與學業規劃工具。
 
 # 目前版本
 
-## v3.1.0 - 穩定桌面版本
+## v3.2.0 - 穩定桌面版本
 
 已完成：
 
-- 完成 Python 桌面圖形化應用程式
-- 支援 Windows 高 DPI 顯示
-- 支援多門課程管理
-- 支援新增課程
-- 支援刪除指定課程
-- 支援清空全部課程
-- 課程資料變更後自動更新 GPA
-- 建立完整 GitHub 專案文件
+- 新增課程編輯功能
+- 支援雙擊修改課程資料
+- 新增課程編輯視窗
+- 改善課程管理流程
+- 優化資料驗證邏輯
 
 ---
 
 # 未來規劃
-
-## v3.2 - 使用體驗優化
-
-預計功能：
-
-- 新增課程編輯功能
-- 支援雙擊修改課程資料
-- 改善圖形介面操作體驗
-- 增加錯誤提示
-- 優化整體使用流程
-
----
 
 ## v4.0 - 學業規劃功能
 
@@ -72,34 +57,20 @@ The project aims to evolve from a simple GPA calculator into a practical applica
 
 # Current Version
 
-## v3.1.0 - Stable Desktop Release
+## v3.2.0 - Stable Desktop Release
 
 Completed:
 
-- Built a Python desktop GUI application
-- Added Windows high DPI support
-- Added multi-course management
-- Added course creation
-- Added course deletion
-- Added clear all courses function
-- Added automatic GPA updates after course changes
-- Created complete GitHub project documentation
+- Added course editing functionality
+- Added double-click editing
+- Added course edit dialog
+- Improved course management workflow
+- Improved validation logic
 
 ---
 
 # Future Plans
 
-## v3.2 - User Experience Improvement
-
-Planned features:
-
-- Course editing functionality
-- Double-click editing
-- Improved GUI interaction
-- Better error handling
-- Improved workflow
-
----
 
 ## v4.0 - Academic Planning Features
 
