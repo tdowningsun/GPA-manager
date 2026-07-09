@@ -8,6 +8,24 @@ This file documents all notable changes of GPA Manager.
 
 # 繁體中文
 
+
+## v3.2.0
+
+### 新增
+
+- 新增課程編輯功能
+- 新增「編輯選中課程」按鈕
+- 支援雙擊課程資料進入編輯模式
+- 新增獨立課程編輯視窗
+- 新增共用課程資料驗證機制
+
+### 改進
+
+- 改善課程管理流程
+- 優化程式結構，使新增與編輯功能共用相同驗證邏輯
+- 提升 GUI 操作體驗
+
+
 ## v3.1.0
 
 ### 新增
@@ -26,7 +44,6 @@ This file documents all notable changes of GPA Manager.
 ---
 
 ## v3.0.0
-
 ### 新增
 
 - 使用 Tkinter 建立圖形化使用者介面
@@ -67,6 +84,22 @@ This file documents all notable changes of GPA Manager.
 ---
 
 # English
+
+## v3.2.0
+
+### Added
+
+- Added course editing functionality
+- Added "Edit Selected" button
+- Added double-click editing support
+- Added independent course editing dialog
+- Added shared course validation system
+
+### Improved
+
+- Improved course management workflow
+- Improved code structure by sharing validation logic
+- Improved GUI user experience
 
 ## v3.1.0
 
