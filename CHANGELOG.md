@@ -8,6 +8,24 @@ This file documents all notable changes of GPA Manager.
 
 # 繁體中文
 
+## v4.6.0
+
+###重大更新
+- exe執行文件化
+
+### 新增
+
+- 添加English
+- 添加json，學生GPA自定義文件
+- 允許修改json以適配學校多重GPA計算方法
+- 添加了獨特的icon
+
+### 改進
+
+- 改進ui畫面
+- 優化程式結構
+- 提升 GUI 操作體驗
+
 
 ## v3.2.0
 
@@ -84,6 +102,25 @@ This file documents all notable changes of GPA Manager.
 ---
 
 # English
+
+## v4.6.0
+
+###Major Update
+- Packaged as a standalone executable
+
+### Added
+
+- Added English language support
+- Introduced a JSON configuration file for customizable GPA calculation
+- Enabled modification of the JSON file to accommodate multiple GPA calculation methods across different institutions
+- Added a custom-designed application icon
+
+### Improved
+
+- Enhanced UI design
+- Optimized program architecture
+- Improved GUI user experience
+
 
 ## v3.2.0
 
