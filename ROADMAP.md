@@ -10,15 +10,12 @@ GPA Manager 是一個面向大學生的 GPA 管理與學業規劃工具。
 
 # 目前版本
 
-## v3.2.0 - 穩定版本
+## v4.6.0 - 發佈版本
 
 已完成：
 
-- 新增課程編輯功能
-- 支援雙擊修改課程資料
-- 新增課程編輯視窗
-- 改善課程管理流程
-- 優化資料驗證邏輯
+- exe執行文件化
+- json學生自定義計算算法
 
 ---
 
@@ -37,15 +34,12 @@ The project aims to evolve from a simple GPA calculator into a practical applica
 
 # Current Version
 
-## v3.2.0 - Stable Release
+## v4.6.0 - Release
 
 Completed:
 
-- Added course editing functionality
-- Added double-click editing
-- Added course edit dialog
-- Improved course management workflow
-- Improved validation logic
+- Packaged as a standalone executable
+- Implemented JSON-based customizable calculation algorithm for students
 
 ---
 
