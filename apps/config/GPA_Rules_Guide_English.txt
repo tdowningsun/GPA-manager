@@ -1,0 +1,702 @@
+==========================================
+ GPA Manager
+ GRS v1 GPA Rules Configuration Guide
+ English Version
+==========================================
+
+
+1. Purpose of This File
+==========================================
+
+This file explains how to configure GPA rules for GPA Manager.
+
+GPA Manager uses JSON configuration files to describe different schools' GPA calculation systems.
+
+One JSON file represents one school's GPA rules.
+
+The software does not automatically guess school rules and does not modify calculation methods automatically.
+
+If your school uses a different GPA system,please edit the corresponding:
+
+config/gpa_scale.json  file.
+
+
+After modifying the file, save it and restart GPA Manager for the new rules to take effect.
+
+
+
+2. GRS v1 Design Principles
+==========================================
+
+
+GPA Manager GRS v1 follows these principles:
+
+
+1. One JSON file corresponds to one school.
+
+
+2. Users cannot write custom formulas.
+
+
+3. The software does not automatically convert
+   Traditional Chinese and Simplified Chinese.
+
+
+Example:
+
+優秀
+
+and
+
+优秀
+
+are considered different inputs.
+
+
+If a school accepts both forms, both must be
+added separately in the JSON file.
+
+
+4. The software does not use fuzzy matching.
+
+Only explicitly defined values in the JSON file
+will be recognized.
+
+
+5. School rules are controlled by the JSON file,
+not hard-coded inside the program.
+
+
+
+3. Basic JSON Structure
+==========================================
+
+
+A complete GRS v1 file contains:
+
+
+metadata
+
+    Basic school information.
+
+
+supported_inputs
+
+    Enable or disable input categories.
+
+
+numeric
+
+    Numeric score calculation rules.
+
+
+text
+
+    Text grade to GPA mapping.
+
+
+letter
+
+    Letter grade to GPA mapping.
+
+
+special
+
+    Special grade handling rules.
+
+
+
+4. metadata Configuration
+==========================================
+
+
+Example:
+
+
+"metadata": {
+    "school": "Example University",
+    "country": "Taiwan",
+    "version": "1.0",
+    "gpa_scale": 5.0
+}
+
+
+
+Field descriptions:
+
+
+school
+
+The name of the school.
+
+
+Example:
+
+"school": "National Example University"
+
+
+
+country
+
+Country or region name.
+
+
+Example:
+
+"country": "Taiwan"
+
+
+
+version
+
+GRS configuration version.
+
+Current version:
+
+"1.0"
+
+
+
+gpa_scale
+
+The maximum GPA value used by the school.
+
+
+Examples:
+
+
+5.0 scale:
+
+"gpa_scale": 5.0
+
+
+4.0 scale:
+
+"gpa_scale": 4.0
+
+
+4.3 scale:
+
+"gpa_scale": 4.3
+
+
+
+This value only represents the GPA maximum.
+It does not determine how grades are calculated.
+
+
+
+5. supported_inputs Configuration
+==========================================
+
+
+Example:
+
+
+"supported_inputs": {
+    "numeric": true,
+    "text": true,
+    "letter": true,
+    "special": false
+}
+
+
+
+This section tells the software which input
+types are supported.
+
+
+numeric
+
+Whether numeric scores are supported.
+
+Examples:
+
+85
+
+90
+
+95
+
+
+
+text
+
+Whether text grades are supported.
+
+Examples:
+
+Excellent
+
+Good
+
+Pass
+
+
+
+letter
+
+Whether letter grades are supported.
+
+Examples:
+
+A
+
+B+
+
+C
+
+
+
+special
+
+Whether special grades are supported.
+
+Examples:
+
+P
+
+W
+
+I
+
+
+
+6. numeric Score Configuration
+==========================================
+
+
+numeric defines how numeric scores are converted
+into GPA values.
+
+
+GRS v1 supports three modes:
+
+
+1. linear
+
+Linear calculation.
+
+
+2. range
+
+Score range mapping.
+
+
+3. lookup
+
+Fixed score lookup.
+
+
+
+==========================================
+6.1 linear Mode
+==========================================
+
+
+Used when GPA increases proportionally with
+numeric scores.
+
+
+Example:
+
+
+"numeric": {
+    "mode": "linear",
+    "min_score": 60,
+    "max_score": 100,
+    "min_gpa": 1.0,
+    "max_gpa": 5.0
+}
+
+
+
+Meaning:
+
+
+60 points = 1.0 GPA
+
+
+100 points = 5.0 GPA
+
+
+Scores between these values are calculated
+automatically.
+
+
+Example:
+
+
+60 → 1.0
+
+70 → 2.0
+
+80 → 3.0
+
+90 → 4.0
+
+100 → 5.0
+
+
+
+This mode is suitable for schools where GPA
+increases continuously according to score.
+
+
+
+==========================================
+6.2 range Mode
+==========================================
+
+
+Used when fixed score ranges correspond to
+fixed GPA values.
+
+
+Example:
+
+
+"numeric": {
+    "mode": "range",
+    "rules": [
+        {
+            "name": "A",
+            "min": 90,
+            "max": 100,
+            "gpa": 4.0
+        }
+    ]
+}
+
+
+
+Meaning:
+
+
+Scores from 90 to 100
+
+are all equal to:
+
+4.0 GPA
+
+
+
+==========================================
+6.3 lookup Mode
+==========================================
+
+
+Used when a school only provides GPA values
+for specific scores.
+
+
+Example:
+
+
+100 points → 4.0
+
+90 points → 3.7
+
+80 points → 3.3
+
+
+
+7. text Grade Configuration
+==========================================
+
+
+text defines text-based grades.
+
+
+Example:
+
+
+"text": {
+    "Excellent": 4.0,
+    "Good": 3.0,
+    "Pass": 1.0
+}
+
+
+
+Input:
+
+
+Excellent
+
+
+Result:
+
+
+4.0 GPA
+
+
+
+Important:
+
+
+Text matching uses exact matching.
+
+
+Example:
+
+
+JSON:
+
+
+"Excellent": 4.0
+
+
+
+Recognized:
+
+
+Excellent
+
+
+
+Not recognized:
+
+
+Excellent Grade
+
+excellent
+
+EXCELLENT
+
+
+
+If other forms are required,
+add them directly into the JSON file.
+
+
+
+Example:
+
+
+"text": {
+    "Excellent":4.0,
+    "優秀":4.0,
+    "优秀":4.0
+}
+
+
+
+8. letter Grade Configuration
+==========================================
+
+
+letter defines letter grade conversion.
+
+
+Example:
+
+
+"letter": {
+    "A+":4.0,
+    "A":4.0,
+    "B":3.0,
+    "F":0.0
+}
+
+
+
+Input:
+
+
+A+
+
+
+Result:
+
+
+4.0 GPA
+
+
+
+9. special Grade Configuration
+==========================================
+
+
+special handles special grades.
+
+
+Examples:
+
+
+P
+
+W
+
+I
+
+
+
+Current supported behaviors:
+
+
+exclude
+
+
+The course is excluded from GPA calculation.
+
+
+
+zero
+
+
+The course is counted as 0 GPA.
+
+
+
+Example:
+
+
+"special": {
+    "P":"exclude",
+    "W":"exclude"
+}
+
+
+
+If the school does not use special grades,
+this section can remain:
+
+
+"special": {}
+
+
+
+10. Common Errors
+==========================================
+
+
+
+Error 1:
+
+
+The software was not restarted after modifying
+the JSON file.
+
+
+Solution:
+
+
+Close GPA Manager completely and open it again.
+
+
+
+------------------------------------------
+
+
+
+Error 2:
+
+
+Invalid JSON format.
+
+
+Example:
+
+
+Wrong:
+
+
+{
+    "A":4.0
+    "B":3.0
+}
+
+
+
+Correct:
+
+
+{
+    "A":4.0,
+    "B":3.0
+}
+
+
+
+------------------------------------------
+
+
+
+Error 3:
+
+
+Using linear mode while keeping rules.
+
+
+Wrong:
+
+
+"mode":"linear",
+"rules":[...]
+
+
+
+Correct:
+
+
+"mode":"linear",
+"min_score":60,
+"max_score":100,
+"min_gpa":1.0,
+"max_gpa":5.0
+
+
+
+------------------------------------------
+
+
+
+Error 4:
+
+
+Confusing Traditional and Simplified Chinese.
+
+
+Example:
+
+
+優秀
+
+and
+
+优秀
+
+
+must be added separately.
+
+
+
+11. Applying Changes
+==========================================
+
+
+After modifying:
+
+config/gpa_scale.json
+
+
+Follow these steps:
+
+
+1. Save the file.
+
+
+2. Completely close GPA Manager.
+
+
+3. Restart GPA Manager.
+
+
+4. Test the new calculation rules.
+
+
+
+If results are incorrect,
+check whether the JSON file follows
+the GRS v1 format.

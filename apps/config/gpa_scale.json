@@ -1,0 +1,61 @@
+{
+    "metadata": {
+        "school": "GPA Manager Default",
+        "country": "Unknown",
+        "version": "1.0",
+        "gpa_scale": 5.0,
+        "description": [
+            "==========================================",
+            " GPA Manager - Default GRS v1 Configuration",
+            "==========================================",
+            "",
+            "This is the default GRS v1 configuration.",
+            "Numeric scores from 60 to 100 are converted to GPA using linear interpolation.",
+            "country, and rules to match your school.",
+            "",
+            "Text grades and letter grades are also supported.",
+            "numeric.rules list below. Letter grades A+ through F",
+            "and the text grades Excellent/Pass/优秀/良好/中等/及格",
+            "are also recognized.",
+            "",
+            "Save this file and restart GPA Manager to apply.",
+            "=========================================="
+        ]
+    },
+    "supported_inputs": {
+        "numeric": true,
+        "text": true,
+        "letter": true,
+        "special": false
+    },
+    "numeric": {
+        "mode": "linear",
+        "min_score": 60,
+        "max_score": 100,
+        "min_gpa": 1.0,
+        "max_gpa": 5.0
+    },
+    "text": {
+        "Excellent": 4.0,
+        "Pass": 2.0,
+        "优秀": 4.0,
+        "優秀": 4.0,
+        "良好": 3.0,
+        "中等": 2.0,
+        "及格": 1.0
+    },
+    "letter": {
+        "A+": 4.0,
+        "A": 4.0,
+        "A-": 3.7,
+        "B+": 3.3,
+        "B": 3.0,
+        "B-": 2.7,
+        "C+": 2.7,
+        "C": 2.3,
+        "C-": 2.0,
+        "D": 1.5,
+        "F": 0.0
+    },
+    "special": {}
+}
