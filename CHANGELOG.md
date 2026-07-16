@@ -10,7 +10,7 @@ This file documents all notable changes of GPA Manager.
 
 ## v4.6.0
 
-###重大更新
+### 重大更新
 - exe執行文件化
 
 ### 新增
@@ -105,7 +105,7 @@ This file documents all notable changes of GPA Manager.
 
 ## v4.6.0
 
-###Major Update
+### Major Update
 - Packaged as a standalone executable
 
 ### Added
