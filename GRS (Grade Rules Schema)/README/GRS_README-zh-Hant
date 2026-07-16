@@ -1,6 +1,6 @@
 # GRS（Grade Rules Schema）
 
-** GRS（Grade Rules Schema，成績規則描述規範）** 是一套開放的 JSON 規範，用於統一描述各大專院校的 GPA（Grade Point Average）計算規則。
+**GRS（Grade Rules Schema，成績規則描述規範）** 是一套開放的 JSON 規範，用於統一描述各大專院校的 GPA（Grade Point Average）計算規則。
 
 GRS 最初作為 **GPA Manager** 專案的一部分而設計，目的是讓不同學校的 GPA 制度能夠透過標準化的 JSON 文件描述，而不需要修改程式碼即可支援不同的計算方式。
 
