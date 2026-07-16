@@ -57,7 +57,8 @@ GPA Manager 是一個使用 Python 開發的桌面 GPA 管理工具。
 
 ## 專案截圖
 
-<img width="849" height="1110" alt="08754be5-9417-4f81-8d43-5206277454b6" src="https://github.com/user-attachments/assets/4c3f071a-70c5-4dbc-9982-b30514e535af" />
+<img width="1149" height="933" alt="b701396e-a568-433a-a8c9-90ee9a498055" src="https://github.com/user-attachments/assets/3386da87-4e20-402c-9e06-4d8be963b72a" />
+
 
 
 ---
@@ -95,7 +96,6 @@ GPA-manager/
 
 未來計畫加入：
 
-- GPA 趨勢分析
 - GPA 預測
 - 學業規劃功能
 
@@ -144,7 +144,8 @@ The project focuses on:
 
 ## Screenshots
 
-<img width="849" height="1110" alt="08754be5-9417-4f81-8d43-5206277454b6" src="https://github.com/user-attachments/assets/08e71975-150d-41ba-beb6-5020446748f4" />
+<img width="1143" height="927" alt="e270f1ba-23fa-4f45-88d9-eb35829d6492" src="https://github.com/user-attachments/assets/e79daffe-718e-4654-8bae-5d5beadac067" />
+
 
 
 ---
