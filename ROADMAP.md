@@ -10,7 +10,7 @@ GPA Manager 是一個面向大學生的 GPA 管理與學業規劃工具。
 
 # 目前版本
 
-## v3.2.0 - 穩定桌面版本
+## v3.2.0 - 穩定版本
 
 已完成：
 
@@ -24,26 +24,6 @@ GPA Manager 是一個面向大學生的 GPA 管理與學業規劃工具。
 
 # 未來規劃
 
-## v4.0 - 學業規劃功能
-
-預計功能：
-
-- 支援學期管理
-- 新增 GPA 趨勢分析
-- 新增目標 GPA 設定
-- 新增 GPA 預測功能
-- 分析學分完成進度
-
----
-
-## v5.0 - 學生學業管理助手
-
-長期目標：
-
-- 提供更完整的學業規劃功能
-- 協助學生分析 GPA 狀況
-- 支援研究生申請前的學業規劃
-- 建立個人化學業資料管理系統
 
 ---
 
@@ -57,7 +37,7 @@ The project aims to evolve from a simple GPA calculator into a practical applica
 
 # Current Version
 
-## v3.2.0 - Stable Desktop Release
+## v3.2.0 - Stable Release
 
 Completed:
 
@@ -72,23 +52,3 @@ Completed:
 # Future Plans
 
 
-## v4.0 - Academic Planning Features
-
-Planned features:
-
-- Semester management
-- GPA trend analysis
-- GPA goal setting
-- GPA prediction
-- Credit completion analysis
-
----
-
-## v5.0 - Student Academic Assistant
-
-Long-term goals:
-
-- Provide more comprehensive academic planning features
-- Help students analyze GPA status
-- Support academic planning before postgraduate applications
-- Build a complete personal academic management system
