@@ -6,19 +6,6 @@ GPA Manager helps university students calculate, manage, and analyze their GPA t
 
 The project focuses on clean architecture, usability, and practical student needs.
 
-Author: Sun Yiming
-
-License
-This project is licensed under the GNU GPL v3.
-
-In short:
-• You are free to use, modify and redistribute this project.
-• If you distribute a modified version, you must also release the source code under GPL v3.
-## Documentation
-
-- [Changelog](CHANGELOG.md)
-- [Roadmap](ROADMAP.md)
-
 ---
 
 # 繁體中文
@@ -193,6 +180,21 @@ Future plans include:
 - GPA trend analysis
 - GPA prediction
 - Academic planning features
+
+---
+
+Author: Sun Yiming
+
+License
+This project is licensed under the GNU GPL v3.
+
+In short:
+• You are free to use, modify and redistribute this project.
+• If you distribute a modified version, you must also release the source code under GPL v3.
+## Documentation
+
+- [Changelog](CHANGELOG.md)
+- [Roadmap](ROADMAP.md)
 
 ---
 
