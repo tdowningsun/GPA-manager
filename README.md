@@ -182,14 +182,17 @@ Future plans include:
 - Academic planning features
 
 ---
+## About
 
 Author: Sun Yiming
 
-License
+License:
 This project is licensed under the GNU GPL v3.
 
 In short:
+
 • You are free to use, modify and redistribute this project.
+
 • If you distribute a modified version, you must also release the source code under GPL v3.
 ## Documentation
 
