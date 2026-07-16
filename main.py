@@ -1,16 +1,30 @@
-"""Command-line entry point for GPA Manager v1.2.
+"""Command-line entry point for GPA Manager v2.0.
 
 This module owns all user interaction: prompts, input validation, and
 output rendering. Calculation logic is delegated to
 :mod:`gpa_calculator`.
+
+The input workflow is split into three clear steps:
+    1. Collect course names.
+    2. Collect credits for each course.
+    3. Collect scores for each course.
 """
 
 from data import Course
+import data
 from gpa_calculator import calculate_gpa, convert_score
+
+# Load the GPA scale from disk before any conversion happens. See
+# ``data.load_gpa_scale`` for the loader's contract.
+data.load_gpa_scale()
 
 EXIT_SENTINEL = "end"
 AFFIRMATIVE_RESPONSES: tuple[str, ...] = ("y", "yes")
 NEGATIVE_RESPONSES: tuple[str, ...] = ("n", "no")
+
+STEP_HEADER_NAMES = "Step 1/3 - Enter Course Names"
+STEP_HEADER_CREDITS = "Step 2/3 - Enter Credits"
+STEP_HEADER_SCORES = "Step 3/3 - Enter Scores"
 
 
 def ask_to_start() -> bool:
@@ -31,14 +45,20 @@ def ask_to_start() -> bool:
         print("Please enter y or n.")
 
 
-def _read_credit() -> float:
-    """Read a positive credit value, re-prompting on invalid input.
+def _read_credit(course_name: str) -> float:
+    """Read a positive credit value for a specific course.
+
+    Re-prompts on invalid input. The course name is embedded in the
+    prompt so the user always knows which course they are filling in.
+
+    Args:
+        course_name: Name of the course this credit belongs to.
 
     Returns:
         A positive credit value as a float.
     """
     while True:
-        raw = input("Credit: ").strip()
+        raw = input(f"Credit for {course_name}: ").strip()
         try:
             value = float(raw)
         except ValueError:
@@ -50,53 +70,163 @@ def _read_credit() -> float:
         return value
 
 
-def _read_score() -> tuple[str, float]:
-    """Read a score and resolve its grade point, re-prompting on invalid input.
+def _read_score(course_name: str) -> tuple[str, float]:
+    """Read a score for a specific course and resolve its grade point.
+
+    Re-prompts on invalid input. The course name is embedded in the
+    prompt so the user always knows which course they are filling in.
+
+    Args:
+        course_name: Name of the course this score belongs to.
 
     Returns:
         A ``(score, point)`` tuple where ``score`` is the raw input
         string and ``point`` is the resolved grade point.
     """
     while True:
-        score = input("Score (number or text: 及格/中等/良好/优秀): ").strip()
+        score = input(
+            f"Score for {course_name} (number or text: 及格/中等/良好/优秀): "
+        ).strip()
         point = convert_score(score)
         if point is not None:
             return score, point
         print(f"Invalid score '{score}'. Please try again.")
 
 
-def collect_courses() -> list[Course]:
-    """Interactively collect course records from the user.
+def _print_step_header(title: str) -> None:
+    """Print a step banner with surrounding blank lines for visual separation."""
+    print()
+    print(title)
+    print()
 
-    The user is asked for course name, credit, and score in a loop
-    until they type ``end`` as the course name. Invalid credit or
-    score entries are re-prompted so the current course is never lost.
+
+def _print_courses_summary(names: list[str]) -> None:
+    """Print a numbered summary of the courses entered in Step 1."""
+    print()
+    print("Courses Entered:")
+    for index, name in enumerate(names, start=1):
+        print(f"{index}. {name}")
+    print()
+    print(f"Total Courses: {len(names)}")
+
+
+def read_course_names() -> list[str]:
+    """Step 1/3: collect course names from the user.
+
+    The user is prompted with an incrementing ``Course N:`` label.
+    Typing ``end`` finishes this step. Empty names are rejected and
+    re-prompted. After the user finishes, a numbered summary of all
+    entered courses is printed.
 
     Returns:
-        A list of :class:`~data.Course` records.
+        A list of course names in the order they were entered. Empty
+        when the user types ``end`` immediately.
     """
-    courses: list[Course] = []
-    print(f'Enter course details. Type "{EXIT_SENTINEL}" as the course name to finish.')
+    names: list[str] = []
+    _print_step_header(STEP_HEADER_NAMES)
     while True:
-        name = input("Course name: ").strip()
+        name = input(f"Course {len(names) + 1}: ").strip()
         if name.lower() == EXIT_SENTINEL:
             break
         if not name:
             print("Course name cannot be empty.")
             continue
+        names.append(name)
 
-        credit = _read_credit()
-        score, point = _read_score()
+    if names:
+        _print_courses_summary(names)
+    return names
 
-        course: Course = {
+
+def read_credits(names: list[str]) -> list[float]:
+    """Step 2/3: collect credits for each previously entered name.
+
+    For every course the user is prompted with ``Credit for <name>:``
+    so they immediately know which course they are entering. Invalid
+    values are re-prompted until a positive number is provided.
+
+    Args:
+        names: Course names collected in Step 1.
+
+    Returns:
+        A list of credit floats aligned by index with ``names``.
+    """
+    _print_step_header(STEP_HEADER_CREDITS)
+    credits: list[float] = []
+    for index, name in enumerate(names):
+        if index > 0:
+            print()
+        credits.append(_read_credit(name))
+    return credits
+
+
+def read_scores(names: list[str]) -> list[tuple[str, float]]:
+    """Step 3/3: collect scores for each previously entered name.
+
+    For every course the user is prompted with ``Score for <name>:``
+    so they immediately know which course they are entering. Invalid
+    scores are re-prompted until a valid value is provided.
+
+    Args:
+        names: Course names collected in Step 1.
+
+    Returns:
+        A list of ``(raw_score, grade_point)`` tuples aligned by index
+        with ``names``.
+    """
+    _print_step_header(STEP_HEADER_SCORES)
+    scores: list[tuple[str, float]] = []
+    for index, name in enumerate(names):
+        if index > 0:
+            print()
+        scores.append(_read_score(name))
+    return scores
+
+
+def build_courses(
+    names: list[str],
+    credits: list[float],
+    scores: list[tuple[str, float]],
+) -> list[Course]:
+    """Assemble :class:`Course` records from the three collected streams.
+
+    Args:
+        names: Course names from Step 1.
+        credits: Credit values from Step 2.
+        scores: ``(raw_score, grade_point)`` pairs from Step 3.
+
+    Returns:
+        A list of fully populated :class:`Course` records.
+    """
+    courses: list[Course] = []
+    for name, credit, (raw_score, point) in zip(names, credits, scores):
+        courses.append({
             "name": name,
             "credit": credit,
-            "score": score,
+            "score": raw_score,
             "point": point,
-        }
-        courses.append(course)
-        print(f"Added: {name} | Credit {credit} | Score {score} | Point {point}")
+        })
     return courses
+
+
+def collect_courses() -> list[Course]:
+    """Orchestrate the three-step interactive input flow.
+
+    Runs Step 1 (names), then Step 2 (credits), then Step 3 (scores),
+    and finally assembles the data into :class:`Course` records. If
+    Step 1 yields no names, the remaining steps are skipped and an
+    empty list is returned.
+
+    Returns:
+        A list of :class:`Course` records, or an empty list when the
+        user provides no course names.
+    """
+    names = read_course_names()
+    if not names:
+        return []
+    credits = read_credits(names)
+    scores = read_scores(names)
+    return build_courses(names, credits, scores)
 
 
 def _compute_column_widths(courses: list[Course]) -> tuple[int, int]:
