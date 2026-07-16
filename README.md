@@ -9,6 +9,7 @@ The project focuses on clean architecture, usability, and practical student need
 
 - [Changelog](CHANGELOG.md)
 - [Roadmap](ROADMAP.md)
+Author: Sun Yiming
 
 ---
 
